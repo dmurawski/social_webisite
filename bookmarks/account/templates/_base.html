@@ -10,11 +10,61 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
 
+    <!-- favicon -->
+    <link rel="icon" type="image/x-icon" href="{% static 'images/favicon-book.png' %}">
+    <!-- font awesome -->
+    <link rel="stylesheet" href="{% static 'css/fontawesome.css' %}">
+    <!-- bootstrap css -->
+    <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
     <!-- custom css -->
-    <link href="{% static "css/base.css" %}" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
 </head>
 <body>
+    <!-- navbar -->
+    <nav class="navbar navbar-expand-md navbar-light bg-light">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="{% url 'dashboard' %}">My Site</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNav">
+            {% if request.user.is_authenticated %}
+            <ul class="navbar-nav mx-auto">
+              <li class="nav-item">
+                <a class="nav-link {% if section == 'dashboard' %}active{% endif %}" href="{% url 'dashboard' %}">Dashboard</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link {% if section == 'images' %}active{% endif %}" href="#">Images</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link {% if section == 'people' %}active{% endif %}" href="#">People</a>
+              </li>
+            </ul>
+            <span class="navbar-text">
+              Hello {{ request.user.first_name|default:request.user.username }}
+            </span>
+            <form class="d-inline ms-4" action="{% url 'logout' %}" method="post">
+              {% csrf_token %}
+              <button type="submit" class="btn btn-outline-danger btn-sm">Logout</button>
+            </form>
+            {% else %}
+            <ul class="navbar-nav ms-auto">
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'login' %}">Log-in</a>
+              </li>
+            </ul>
+            {% endif %}
+          </div>
+        </div>
+      </nav>
+      
+
     {% block content %}
     {% endblock %}
+
+    <!-- bootstrap js -->
+    <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+    <!-- custom js -->
+    <script src="{% static 'js/script.js' %}"></script>
 </body>
 </html>
