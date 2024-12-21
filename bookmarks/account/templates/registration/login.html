@@ -1,21 +1,37 @@
 {% extends "_base.html" %}
 {% block title %}Log-in{% endblock %}
 {% block content %}
- <h1>Log-in</h1>
- {% if form.errors %}
- <p>
- Your username and password didn't match.
- Please try again.
- </p>
- {% else %}
- <p>Please, use the following form to log-in:</p>
- {% endif %}
- <div>
- <form action="{% url 'login' %}" method="post">
- {{ form.as_p }}
- {% csrf_token %}
- <input type="hidden" name="next" value="{{ next }}" />
- <p><input type="submit" class="btn btn-success" value="Log-in"></p>
- </form>
- </div>
+  <div>
+    <div class="row py-5">
+      <div class="col-4 offset-4">
+        <h1>Log-in</h1>
+        {% if form.errors %}
+          <p>
+            Your username and password didn't match.
+            Please try again.
+          </p>
+        {% else %}
+          <p>Please, use the following form to log-in:</p>
+        {% endif %}
+        <form action="{% url 'login' %}" method="post">
+          {% csrf_token %}
+          <div class="mb-3">
+            <input type="text" class="form-control bg-light" name="{{ form.username.name }}" placeholder="Username">
+          </div>
+          <div class="mb-3">
+            <input type="password" class="form-control bg-light" name="{{ form.password.name }}" placeholder="Password">
+          </div>
+          <input type="hidden" name="next" value="{{ next }}" />
+          <div class="d-grid gap-2">
+            <input type="submit" value="Log-in" class="btn btn-success text-white">
+          </div>
+        </form>
+        <p class="mt-4">
+          <a href="{% url 'password_reset' %}" class="text-primary">
+            Forgotten your password?
+          </a>
+        </p>
+      </div>
+    </div>
+  </div>
 {% endblock %}
