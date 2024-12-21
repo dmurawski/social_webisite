@@ -1,0 +1,44 @@
+{% extends "_base.html" %}
+{% block title %}Create an account{% endblock %}
+{% block content %}
+<div class="container">
+<div class="row py-5">
+    <div class="col-lg-6 offset-lg-3">
+<h1>Create an account</h1>
+<p>Please, sign up using the following form:</p>
+<form method="post">
+    {% csrf_token %}
+    
+    <div class="mb-3">
+        <input type="text" class="form-control bg-light" placeholder="Username" name="username">
+        {{ user_form.username.errors }}
+    </div>
+
+    <div class="mb-3">
+        <input type="text" class="form-control bg-light" placeholder="First name" name="first_name">
+        {{ user_form.first_name.errors }}
+    </div>
+
+    <div class="mb-3">
+        <input type="email" class="form-control bg-light" placeholder="Email" name="email">
+        {{ user_form.email.errors }}
+    </div>
+
+    <div class="mb-3">
+        <input type="password" class="form-control bg-light" placeholder="Password" name="password">
+        {{ user_form.password.errors }}
+    </div>
+
+    <div class="mb-3">
+        <input type="password" class="form-control bg-light" placeholder="Repeat password" name="password2">
+        {{ user_form.password2.errors }}
+    </div>
+
+    <div class="d-grid gap-2">
+        <input type="submit" value="Create my account" class="btn btn-success text-white">
+    </div>
+</form>
+    </div>
+</div>
+</div>
+{% endblock %}
