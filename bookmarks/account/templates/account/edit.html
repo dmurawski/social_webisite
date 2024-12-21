@@ -1,0 +1,47 @@
+{% extends "_base.html" %}
+{% block title %}Edit your account{% endblock title %}
+
+{% block content %}
+  <div class="container py-5">
+    <div class="row">
+      <div class="col-lg-6 offset-lg-3">
+        <h1>Edit your account</h1>
+        <p class="lead">You can edit your account using the following form:</p>
+        <form method="post" enctype="multipart/form-data">
+          {% csrf_token %}
+          <div class="mb-3">
+            <input type="text" class="form-control bg-light" placeholder="First name" name="first_name"
+                   value="{{ user_form.first_name.value|default:'' }}">
+            {{ user_form.first_name.errors }}
+          </div>
+          <div class="mb-3">
+            <input type="text" class="form-control bg-light" placeholder="Last name" name="last_name"
+                   value="{{ user_form.last_name.value|default:'' }}">
+            {{ user_form.last_name.errors }}
+          </div>
+          <div class="mb-3">
+            <input type="email" class="form-control bg-light" placeholder="Email address" name="email"
+                   value="{{ user_form.email.value|default:'' }}">
+            {{ user_form.email.errors }}
+          </div>
+          <div class="mb-3">
+            <input type="date" class="form-control bg-light" placeholder="Date of bith" name="date_of_birth"
+                   value="{{ profile_form.date_of_birth.value|default:'' }}">
+            {{ profile_form.date_of_birth.errors }}
+          </div>
+          <div class="mb-3">
+            <label for="photo" class="form-label">Upload Photo</label>
+            {% if profile_form.instance.photo %}
+              <img src="{{ profile_form.instance.photo.url }}" class="img-thumbnail mb-2" width="150" alt="Current photo">
+            {% endif %}
+            <input class="form-control" type="file" id="photo" name="photo">
+            {{ profile_form.photo.errors }}
+          </div>
+          <div class="d-grid">
+            <input type="submit" class="btn btn-success" value="Save changes">
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+{% endblock content %}
