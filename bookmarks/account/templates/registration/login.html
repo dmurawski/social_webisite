@@ -28,6 +28,15 @@
             <input type="submit" value="Log-in" class="btn btn-success text-white">
           </div>
         </form>
+
+        <!-- Google Login Button -->
+        <div class="d-grid gap-2 mt-3">
+          <a href="{% url 'social:begin' 'google-oauth2' %}" class="btn btn-outline-primary w-100">
+            <i class="fa-brands fa-google me-2"></i>
+            Log in with Google
+          </a>
+        </div>
+
         <p class="mt-4">
           <a href="{% url 'password_reset' %}" class="text-primary">
             Forgotten your password?
