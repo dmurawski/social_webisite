@@ -4,7 +4,7 @@ from django.utils.text import slugify
 
 
 class Image(models.Model):
-    user = models.models.ForeignKey(
+    user = models.ForeignKey(
         settings.AUTH_USER_MODEL,
         related_name="images_created",
         on_delete=models.CASCADE,
@@ -15,6 +15,11 @@ class Image(models.Model):
     image = models.ImageField(upload_to="images/%Y/%m/%d/")
     description = models.TextField(blank=True)
     created = models.DateTimeField(auto_now_add=True)
+    users_like = models.ManyToManyField(
+        settings.AUTH_USER_MODEL,
+        related_name="images_liked",
+        blank=True,
+    )
 
     class Meta:
         indexes = [
