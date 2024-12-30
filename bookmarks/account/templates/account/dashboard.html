@@ -3,9 +3,19 @@
 {% block content %}
   <div class="container py-6">
     <div class="row">
-      <div class="col-lg-6 offset-lg-3">
+      <div class="col-lg-10 offset-lg-1 text-center">
         <h1 class="display-4 fw-bold">Dashboard</h1>
-        <p>Welcome to your dashboard. You can <a class="text-primary text-decoration-none" href="{% url 'edit' %}">edit your profile</a> or <a class="text-primary text-decoration-none" href="{% url 'password_change' %}">change your password</a>.</p>
+        <hr>
+        {% with total_images_created=request.user.images_created.count %}
+          <p class="lead fw-bold">Welcome to your dashboard. You have bookmarked 
+            {{ total_images_created }} image{{ total_images_created|pluralize }}.</p>
+        {% endwith %}
+        <p>Drag the following button to your bookmarks toolbar to bookmark images from other websites <i class="fa-solid fa-arrow-right"></i> <a href="javascript:{% include "bookmarklet_launcher.js" %}" class="text-decoration-none btn btn-primary text-white">
+          Bookmark it
+        </a></p>
+
+        <p>You can also <a href="{% url "edit" %}" class="text-decoration-none">edit your profile</a> or 
+        <a href="{% url "password_change" %}" class="text-decoration-none">change your password</a>.</p>
       </div>
     </div>
   </div>
