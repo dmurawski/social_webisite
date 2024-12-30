@@ -4,3 +4,4 @@ isort
 pillow
 social-auth-app-django
 requests
+easy-thumbnails
