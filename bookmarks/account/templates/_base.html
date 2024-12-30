@@ -37,7 +37,7 @@
                 <a class="nav-link {% if section == 'images' %}primary{% endif %}" href="{% url 'images:list' %}">Images</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link {% if section == 'people' %}active{% endif %}" href="#">People</a>
+                <a class="nav-link {% if section == 'people' %}active{% endif %}" href="{% url 'user_list' %}">People</a>
               </li>
             </ul>
             <span class="navbar-text">

@@ -1,0 +1,32 @@
+{% extends "_base.html" %}
+{% load thumbnail %}
+{% block title %}{{ user.get_full_name}}{% endblock title %}
+{% block content %}
+  <div class="container">
+    <div class="row py-6">
+      <h1 class="display-5 fw-bold">{{ user.get_full_name }}</h1>
+      <hr>
+      <div class="col-3">
+        <div class="rounded-circle">
+          <img src="{% thumbnail user.profile.photo 180x180 %}">
+        </div>
+        {% with total_followers=user.followers.count %}
+          <button class="btn btn-outline-secondary border-3 fw-bold mb-3">
+            <span class="">{{ total_followers }}</span>
+            follower{{ total_followers|pluralize }}
+          </button>
+          <a href="#" data-id="{{ user.id }}" data-action="{% if request.user in user.followers.all %}un{% endif %}follow" class="follow button">
+            {% if request.user not in user.followers.all %}
+              <button class="btn btn-secondary border-3 fw-bold text-white mb-3">Follow</button>
+            {% else %}
+                <button class="btn btn-danger border-3 fw-bold">Unfollow</button>
+            {% endif %}
+          </a>
+      </div>
+      <div class="col-9">
+        {% include "images/image/list_images.html" with images=user.images_created.all %}
+      </div>
+{% endwith %}
+</div>
+</div>
+{% endblock content %}
