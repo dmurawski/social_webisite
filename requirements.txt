@@ -3,3 +3,4 @@ djhtml
 isort
 pillow
 social-auth-app-django
+requests
