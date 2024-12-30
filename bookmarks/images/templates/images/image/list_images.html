@@ -1,0 +1,20 @@
+{% load thumbnail %}
+<div class="container py-5">
+    <div class="row">
+        {% for image in images %}
+        <div class="col-6 col-lg-4 col-xl-3 mb-5">
+            <div class="card h-100 shadow-sm border-top border-primary">
+                <a href="{{ image.get_absolute_url }}">
+                    {% thumbnail image.image 300x300 crop="smart" as im %}
+                    <img src="{{ im.url }}" class="card-img-top" alt="{{ image.title }}">
+                </a>
+                <div class="card-body text-center bg-light">
+                    <a href="{{ image.get_absolute_url }}" class="text-decoration-none text-dark">
+                        <h5 class="card-title">{{ image.title }}</h5>
+                    </a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
