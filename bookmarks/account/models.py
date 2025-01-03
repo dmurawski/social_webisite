@@ -12,6 +12,7 @@ class Profile(models.Model):
     photo = models.ImageField(
         upload_to="users/%Y/%m/%d/",
         blank=True,
+        default="default/default_profile.png",
     )
 
     def __str__(self):
