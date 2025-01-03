@@ -18,6 +18,9 @@
               <button class="btn btn-outline-secondary fw-bold border-3">
                 {{ total_likes }} like{{ total_likes|pluralize }}
               </button>
+              <button class="btn btn-outline-primary fw-bold border-3">
+                {{ total_views }} view{{ total_views|pluralize }}
+              </button>
               <a href="#" class="like btn btn-success ms-4" data-id="{{ image.id }}" data-action="{% if request.user in users_like %}un{% endif %}like">
                 {% if request.user not in users_like %}
                   Like
