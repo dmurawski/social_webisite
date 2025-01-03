@@ -47,8 +47,8 @@ def image_create(request):
             cd = form.cleaned_data
             new_image = form.save(commit=False)
             new_image.user = request.user
-            create_action(request.user, "bookmarked image", new_image)
             new_image.save()
+            create_action(request.user, "bookmarked image", new_image)
             messages.success(request, "Image added successfully")
             return redirect(new_image.get_absolute_url())
 

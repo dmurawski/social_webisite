@@ -3,15 +3,15 @@
 {% block content %}
   <div class="container">
     <div class="row py-6">
-      <h1 class="display-5 fw-bold text-center">{{ image.title }}</h1>
+      <h1 class="display-5 fw-bold text-center">{{ image.title|truncatechars:50 }}</h1>
       <hr>
-      <div class="col-md-6">
+      <div class="col-md-4">
         {% load thumbnail %}
         <a href="{{ image.image.url }}">
             <img src="{% thumbnail image.image 300x0 %}" class="img-fluid">
         </a>
       </div>
-      <div class="col-md-6">
+      <div class="col-md-8">
         {% with total_likes=image.users_like.count users_like=image.users_like.all %}
           <div class="image-info">
             <div class="pb-5">
@@ -21,7 +21,7 @@
               <button class="btn btn-outline-primary fw-bold border-3">
                 {{ total_views }} view{{ total_views|pluralize }}
               </button>
-              <a href="#" class="like btn btn-success ms-4" data-id="{{ image.id }}" data-action="{% if request.user in users_like %}un{% endif %}like">
+              <a href="#" class="like btn {% if request.user in users_like %}btn-danger{% else %}btn-outline-success{% endif %} fw-bold border-3" data-id="{{ image.id }}" data-action="{% if request.user in users_like %}Un{% endif %}like">
                 {% if request.user not in users_like %}
                   Like
                 {% else %}
@@ -29,13 +29,17 @@
                 {% endif %}
               </a>
             </div>
+            <p class="lead fw-bold">Description</p>
+            <hr>
             {{ image.description|linebreaks }}
           </div>
           <div class="image-likes">
+            <p class="lead fw-bold">Users who liked this image</p>
+            <hr>
             {% for user in image.users_like.all %}
-              <div>
+              <div class="d-flex align-items-center">
                 {% if user.profile.photo %}
-                  <img src="{{ user.profile.photo.url }}" class="img-fluid">
+                  <img src="{{ user.profile.photo.url }}" class="rounded-circle c-img-user me-3">
                 {% endif %}
                 <p>{{ user.first_name }}</p>
               </div>

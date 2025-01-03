@@ -19,13 +19,15 @@
       </div>
     </div>
     <div class="row text-lg-center py-6">
+      <div class="col-lg-10 offset-lg-1 text-center">
       <h2 class="display-5 fw-bold">What's happening</h2>
       <hr>
-      <div id="action-list">
+      <div>
       {% for action in actions %}
         {% include "actions/action/detail.html" %}
       {% endfor %}
       </div>
     </div>
+  </div>
   </div>
 {% endblock %}
